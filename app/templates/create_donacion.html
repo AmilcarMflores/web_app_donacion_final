@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="subtitle is-2" style="margin-top: 25px ;">Registrar donación</h2>
+<form method="post">
+  <div class="field">
+    <label for="username_donante">Donante:</label>
+    <div class="control">
+      {% if current_user.has_role("admin") %}
+      <select name="username_donante" id="username_donante" required>
+        <option value="" disabled selected>Selecciona un donante</option>
+        {% for user in users %}
+        <option value="{{ user.username }}">
+          {{ user.nombre }} {{ user.apellido }}
+        </option>
+        {% endfor %}
+      </select>
+      {% else %}
+      <input type="text" name="username_donante" id="username_donante" value="{{ current_user.username }}" disabled>
+      <input type="hidden" name="username_donante" value="{{ current_user.username }}">
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <label for="monto">Monto:</label>
+    <div class="control">
+      <input type="number" id="monto" name="monto" required class="input">
+    </div>
+  </div>
+  <div class="field">
+    <label for="fecha_donacion">Fecha de donación:</label>
+    <div class="control">
+      <input type="date" id="fecha_donacion" name="fecha_donacion" required class="input">
+    </div>
+  </div>
+  <div class="field">
+    <label for="metodo_pago">Método de pago:</label>
+    <div class="control">
+      <input type="text" id="metodo_pago" name="metodo_pago" required class="input">
+    </div>
+  </div>
+  <input type="submit" value="Registrar" class="button is-primary">
+</form>
+{% endblock %}

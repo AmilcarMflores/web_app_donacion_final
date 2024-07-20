@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="subtitle is-2" style="margin-top: 25px ;">Editar Dulce</h2>
+<form method="post">
+  <!-- id, id_donante, monto, fecha_donacion, metodo_pago -->
+  <div class="field">
+    <label for="username">Username:</label>
+    <div class="control">
+      <input type="text" id="username" name="username" required class="input" value="{{ donacion.username }}">
+    </div>
+  </div>
+  <div class="field">
+    <label for="monto">Monto:</label>
+    <div class="control">
+      <input type="text" id="monto" name="monto" required class="input" value="{{ donacion.monto }}">
+    </div>
+  </div>
+  <div class="field">
+    <label for="fecha_donacion">Fecha de donación:</label>
+    <div class="control">
+      <input type="text" id="fecha_donacion" name="fecha_donacion" required class="input" value="{{ donacion.fecha_donacion }}">
+    </div>
+  </div>
+  <div class="field">
+    <label for="metodo_pago">Método de pago:</label>
+    <div class="control">
+      <input type="text" id="metodo_pago" name="metodo_pago" required class="input" value="{{ donacion.metodo_pago }}">
+    </div>
+  </div>
+  <input type="submit" value="Guardar Cambios" class="button is-primary">
+</form>
+{% endblock %}

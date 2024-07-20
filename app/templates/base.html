@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <header>
+    <div class="hero is-primary">
+      <div class="hero-body">
+        <h1 class="title has-text-centered" style="padding-top: 4%;">Sistema de Gestión de Donaciones ❤️‍🩹</h1>
+      </div>
+    </div>
+  </header>
+  {% if current_user.is_authenticated %}
+  <nav class="navbar is-fixed-top is-primary">
+    <div class="container">
+
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar has-text-centered">
+          {% if current_user.has_role("admin") %}
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('user.list_users') }}">
+            Lista de donantes
+          </a>
+          {% endif %}
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('donacion.create_donacion') }}">
+            Crear donación
+          </a>
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('user.profile', id=current_user.id) }}">
+            Perfil
+          </a>
+          {% if current_user.has_role("admin") %}
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('donacion.list_donaciones') }}">
+            Lista de donaciones
+          </a>
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('user.user_report') }}">
+            Generar reportes
+          </a>
+          {% endif %}
+          <a class="navbar-item has-background-success-light has-text-danger" href="{{ url_for('user.logout') }}">
+            Cerrar Sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {% endif %}
+
+  <main>
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts de Bulma para el burger menu -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.querySelector('#navbarBasicExample');
+
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+  </script>
+</body>
+</html>

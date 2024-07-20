@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    form {
+        margin-top: 2rem;
+    }
+    .crear {
+        margin-left: 2rem;
+    }
+    .titulo_login {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 1rem 0;
+        color: #a3adc4;
+    }
+</style>
+    <h1 class="title titulo_login">Iniciar Sesión</h1>
+    <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+            <form method="post">
+                <div class="field">
+                    <label class="label is-size-4">Nombre de Donante:</label>
+                    <div class="control">
+                        <input class="input" type="text" name="username" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label is-size-4">Contraseña:</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" required>
+                    </div>
+                </div>
+                <div class="field is-grouped mt-6">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Iniciar Sesión</button>
+                    </div>
+                    <div class="control">
+                        <a href="{{ url_for('user.create_user') }}" class="button is-info crear">Crear Donante</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
